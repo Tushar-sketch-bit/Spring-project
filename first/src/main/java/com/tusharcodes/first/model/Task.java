@@ -42,7 +42,7 @@ public class Task {
         this.deadline = deadline;
 
     }
-    static Task of(long id, String title, String description, Status status, int priority, LocalDate deadline) {
+    static Task of(long id,@NonNull String title, String description, Status status, int priority, LocalDate deadline) {
         return new Task(id, title, description, status, priority, deadline);
     }*/
     //getter functions

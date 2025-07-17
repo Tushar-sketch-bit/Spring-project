@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonTypeId;
 import jakarta.persistence.*;
 import lombok.*;
 
+
 import java.beans.ConstructorProperties;
 import java.util.List;
 
@@ -15,17 +16,19 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     final private long id;
-
-    @NonNull
-    private String username;
-
     @NonNull
     private String email;
+    @NonNull
+    private String password;
+
 
     @OneToMany(mappedBy="user",cascade=CascadeType.ALL)
     private List<Project> projects;
 
-   /* @ConstructorProperties({"id","username","email","projects"})
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+   /* @ConstructorProperties({"id","email","password","projects"})
     private User(long id, String username, String email, List<Project> projects){
         this.id = id;
         this.username = username;
@@ -33,8 +36,8 @@ public class User {
         this.projects = projects;
     }*/
 
-    public static User of(long id, @NonNull String username, @NonNull String email, List<Project> projects){
-        return new User(id, username, email, projects);
+    public static User of(long id, @NonNull String password, @NonNull String email, List<Project> projects,Role role) {
+        return new User(id, password, email, projects,role);
     }
 
 
