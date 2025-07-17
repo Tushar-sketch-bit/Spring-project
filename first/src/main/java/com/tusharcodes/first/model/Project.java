@@ -1,14 +1,22 @@
 package com.tusharcodes.first.model;
 import jakarta.persistence.*;
+import lombok.*;
 import java.beans.ConstructorProperties;
 import java.util.ArrayList;
 
 
+@Getter
+@Setter
+@NoArgsConstructor(force = true)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Builder
 @Entity
 public class Project {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-     private long id;
+     final private long id;
+     @NonNull
      private String name;
      private String link;
 
@@ -20,29 +28,17 @@ public class Project {
     private ArrayList<Task> tasks = new ArrayList<>();
 
 
-    public Project(){}
     @ConstructorProperties({"id","name", "link"})
-   protected Project(long id,String name, String link) {
+    protected Project(long id,@NonNull String name, String link) {
         this.id = id;
         this.name = name;
         this.link = link;
 
     }
 
-
-    static Project of(long id, String name, String link){
+   public static Project of(long id, String name, String link){
         return new Project(id, name, link);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getLink() {
-        return link;
-    }
-    public long getId() {
-        return id;
-    }
 
 }
