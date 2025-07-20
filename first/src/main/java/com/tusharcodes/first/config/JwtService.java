@@ -2,7 +2,7 @@ package com.tusharcodes.first.config;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
-
+import com.tusharcodes.first.model.User;
 import java.security.Key;
 import java.util.Date;
 import java.util.function.Function;
@@ -16,8 +16,10 @@ public class JwtService {
     }
 
     public String generateToken(String email) {
+        User user = new User();
         return Jwts.builder()
                 .setSubject(email)
+                .claim("name", user.getName())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 hours
                 .signWith(SignatureAlgorithm.HS256, getSignInKey())

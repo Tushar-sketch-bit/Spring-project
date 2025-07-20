@@ -9,6 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Entity
@@ -16,6 +17,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     final private long id;
+    @NonNull
+    String name;
     @NonNull
     private String email;
     @NonNull
@@ -36,8 +39,8 @@ public class User {
         this.projects = projects;
     }*/
 
-    public static User of(long id, @NonNull String password, @NonNull String email, List<Project> projects,Role role) {
-        return new User(id, password, email, projects,role);
+    public static User of(long id,@NonNull String name, @NonNull String password, @NonNull String email, List<Project> projects,Role role) {
+        return new User(id,name, password, email, projects,role);
     }
 
 
