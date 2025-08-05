@@ -2,10 +2,14 @@ package com.tusharcodes.first.model;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 
 import java.beans.ConstructorProperties;
+import java.util.Collection;
 import java.util.List;
+import org.springframework.security.core.userdetails.*;
 
 @Getter
 @Setter
@@ -13,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor(force = true)
 @AllArgsConstructor
 @Entity
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     final private long id;
@@ -44,8 +48,13 @@ public class User {
     }
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
 
-
-
-
+    @Override
+    public String getUsername() {
+        return "";
+    }
 }

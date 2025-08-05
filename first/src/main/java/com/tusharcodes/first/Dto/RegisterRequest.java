@@ -6,6 +6,9 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Getter
+@Setter
 public class RegisterRequest {
     private String name;
     private String email;
